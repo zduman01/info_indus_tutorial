@@ -1,14 +1,29 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+
 <package format="3">
+
   <name>pentographe_description</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>Description et visualisation du pantographe à cinq barres</description>
+
   <maintainer email="zilan.duman@insa-strasbourg.fr">zilan</maintainer>
-  <license>TODO: License declaration</license>
+  <license>Apache-2.0</license>
 
   <depend>rclpy</depend>
   <depend>robot_state_publisher</depend>
+  <depend>geometry_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>ament_index_python</depend>
+  <depend>launch</depend>
+  <depend>launch_ros</depend>
+
+  <exec_depend>rviz2</exec_depend>
+  <exec_depend>pentographe_kinematics</exec_depend>
+  <exec_depend>rqt_gui</exec_depend>
+  <exec_depend>rqt_topic</exec_depend>
+  <exec_depend>rqt_publisher</exec_depend>
+  <exec_depend>rqt_plot</exec_depend>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
@@ -18,4 +33,5 @@
   <export>
     <build_type>ament_python</build_type>
   </export>
+
 </package>
