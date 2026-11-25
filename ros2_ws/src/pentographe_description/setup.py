@@ -1,6 +1,6 @@
-from setuptools import setup
-from glob import glob
 import os
+from glob import glob
+from setuptools import setup
 
 package_name = 'pentographe_description'
 
@@ -23,19 +23,29 @@ setup(
          glob('meshes/*.dae')),
 
         (os.path.join('share', package_name, 'launch'),
-         glob('launch/*.py')),
+         glob('launch/*.launch.py')),
 
         (os.path.join('share', package_name, 'config'),
          glob('config/*')),
+
+        (os.path.join('share', package_name, 'sdf'),
+         glob('sdf/*.sdf')),
+
+        (os.path.join('share', package_name, 'worlds'),
+         glob('worlds/*.sdf')),
     ],
 
     install_requires=['setuptools'],
     zip_safe=True,
+
     maintainer='zilan',
-    maintainer_email='zilan@example.com',
-    description='Description URDF du pantographe à cinq barres',
+    maintainer_email='zilan.duman@insa-strasbourg.fr',
+
+    description='Description, visualisation et simulation du pantographe à cinq barres',
+
     license='Apache-2.0',
     tests_require=['pytest'],
+
     entry_points={
         'console_scripts': [
             'joint_bridge = pentographe_description.joint_bridge:main',

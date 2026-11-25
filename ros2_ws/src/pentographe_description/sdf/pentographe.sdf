@@ -1,0 +1,401 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+
+  <model name="pentographe">
+
+    <!-- ========================================= -->
+    <!-- FIXATION DE LA BASE                       -->
+    <!-- ========================================= -->
+
+    <joint name="fixation_base" type="fixed">
+      <pose relative_to="__model__">0 0 0 0 0 0</pose>
+      <parent>world</parent>
+      <child>base</child>
+    </joint>
+
+    <link name="base">
+
+      <pose relative_to="fixation_base">0 0 0 0 0 0</pose>
+
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>2</mass>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0</iyz>
+          <izz>0.001</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="base_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>../meshes/base.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+
+    </link>
+
+
+    <!-- ========================================= -->
+    <!-- MOTEUR DROIT                              -->
+    <!-- ========================================= -->
+
+    <joint name="joint_moteur_droit" type="revolute">
+
+      <pose relative_to="base">0.058 0.08 0.07 0 0 0</pose>
+
+      <parent>base</parent>
+      <child>link4</child>
+
+      <axis>
+        <xyz>0 1 0</xyz>
+
+        <limit>
+          <lower>-3.14159</lower>
+          <upper>3.14159</upper>
+          <effort>1</effort>
+          <velocity>1</velocity>
+        </limit>
+
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+
+    </joint>
+
+
+    <!-- ========================================= -->
+    <!-- LINK 4 : BRAS DROIT                       -->
+    <!-- ========================================= -->
+
+    <link name="link4">
+
+      <pose relative_to="joint_moteur_droit">0 0 0 0 0 0</pose>
+
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0</iyz>
+          <izz>0.001</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="link4_visual">
+        <pose>-0.058 -0.08 -0.07 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>../meshes/link4.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+
+    </link>
+
+
+    <!-- ========================================= -->
+    <!-- COUDE DROIT                               -->
+    <!-- ========================================= -->
+
+    <joint name="joint_coude_droit" type="revolute">
+
+      <pose relative_to="link4">0.0322 0 -0.0721 0 0 0</pose>
+
+      <parent>link4</parent>
+      <child>link3</child>
+
+      <axis>
+        <xyz>0 1 0</xyz>
+
+        <limit>
+          <lower>-3.14159</lower>
+          <upper>3.14159</upper>
+          <effort>1</effort>
+          <velocity>1</velocity>
+        </limit>
+
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+
+    </joint>
+
+
+    <!-- ========================================= -->
+    <!-- LINK 3 : AVANT-BRAS DROIT                 -->
+    <!-- ========================================= -->
+
+    <link name="link3">
+
+      <pose relative_to="joint_coude_droit">0 0 0 0 0 0</pose>
+
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0</iyz>
+          <izz>0.001</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="link3_visual">
+        <pose>-0.0902 -0.08 0.0021 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>../meshes/link3.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+
+    </link>
+
+
+    <!-- ========================================= -->
+    <!-- MOTEUR GAUCHE                             -->
+    <!-- ========================================= -->
+
+    <joint name="joint_moteur_gauche" type="revolute">
+
+      <pose relative_to="base">-0.08 0.08 0.07 0 0 0</pose>
+
+      <parent>base</parent>
+      <child>link1</child>
+
+      <axis>
+        <xyz>0 1 0</xyz>
+
+        <limit>
+          <lower>-3.14159</lower>
+          <upper>3.14159</upper>
+          <effort>1</effort>
+          <velocity>1</velocity>
+        </limit>
+
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+
+    </joint>
+
+
+    <!-- ========================================= -->
+    <!-- LINK 1 : BRAS GAUCHE                      -->
+    <!-- ========================================= -->
+
+    <link name="link1">
+
+      <pose relative_to="joint_moteur_gauche">0 0 0 0 0 0</pose>
+
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0</iyz>
+          <izz>0.001</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="link1_visual">
+        <pose>0.08 -0.08 -0.07 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>../meshes/link1.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+
+    </link>
+
+
+    <!-- ========================================= -->
+    <!-- COUDE GAUCHE                              -->
+    <!-- ========================================= -->
+
+    <joint name="joint_coude_gauche" type="revolute">
+
+      <pose relative_to="link1">0 0 -0.08 0 0 0</pose>
+
+      <parent>link1</parent>
+      <child>link2</child>
+
+      <axis>
+        <xyz>0 1 0</xyz>
+
+        <limit>
+          <lower>-3.14159</lower>
+          <upper>3.14159</upper>
+          <effort>1</effort>
+          <velocity>1</velocity>
+        </limit>
+
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+
+    </joint>
+
+
+    <!-- ========================================= -->
+    <!-- LINK 2 : AVANT-BRAS GAUCHE                -->
+    <!-- ========================================= -->
+
+    <link name="link2">
+
+      <pose relative_to="joint_coude_gauche">0 0 0 0 0 0</pose>
+
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0</iyz>
+          <izz>0.001</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="link2_visual">
+        <pose>0.08 -0.08 0.01 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>../meshes/link2.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+
+    </link>
+
+
+    <!-- ========================================= -->
+    <!-- REPERE PEN                                -->
+    <!-- ========================================= -->
+
+    <frame name="fixation_repere_pen" attached_to="base">
+      <pose>-0.08 0.08 0.07 -1.5708 0 0</pose>
+    </frame>
+
+    <frame name="repere_pen" attached_to="fixation_repere_pen"/>
+
+
+    <!-- ========================================= -->
+    <!-- FERMETURE DE LA CHAINE CINEMATIQUE        -->
+    <!-- ========================================= -->
+
+    <joint name="joint_fermeture" type="revolute">
+
+      <pose relative_to="link3">
+        -0.070366 0 -0.129600 0 0 0
+      </pose>
+
+      <parent>link2</parent>
+      <child>link3</child>
+
+      <axis>
+        <xyz>0 1 0</xyz>
+
+        <limit>
+          <lower>-3.14159</lower>
+          <upper>3.14159</upper>
+        </limit>
+
+        <dynamics>
+          <damping>0.01</damping>
+        </dynamics>
+      </axis>
+
+    </joint>
+
+
+    <!-- ========================================= -->
+    <!-- CONTROLEUR DE POSITION MOTEUR GAUCHE     -->
+    <!-- ========================================= -->
+
+    <plugin
+      filename="ignition-gazebo-joint-position-controller-system"
+      name="ignition::gazebo::systems::JointPositionController">
+
+      <joint_name>joint_moteur_gauche</joint_name>
+
+      <topic>/pentographe/moteur_gauche/cmd_pos</topic>
+
+      <p_gain>2.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.1</d_gain>
+
+      <cmd_max>0.3</cmd_max>
+      <cmd_min>-0.3</cmd_min>
+
+      <initial_position>0.0</initial_position>
+
+    </plugin>
+
+
+    <!-- ========================================= -->
+    <!-- CONTROLEUR DE POSITION MOTEUR DROIT      -->
+    <!-- ========================================= -->
+
+    <plugin
+      filename="ignition-gazebo-joint-position-controller-system"
+      name="ignition::gazebo::systems::JointPositionController">
+
+      <joint_name>joint_moteur_droit</joint_name>
+
+      <topic>/pentographe/moteur_droit/cmd_pos</topic>
+
+      <p_gain>2.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.1</d_gain>
+
+      <cmd_max>0.3</cmd_max>
+      <cmd_min>-0.3</cmd_min>
+
+      <initial_position>0.0</initial_position>
+
+    </plugin>
+
+
+    <!-- ========================================= -->
+    <!-- PUBLICATION DES ETATS DES ARTICULATIONS   -->
+    <!-- ========================================= -->
+
+    <plugin
+      filename="ignition-gazebo-joint-state-publisher-system"
+      name="ignition::gazebo::systems::JointStatePublisher">
+    </plugin>
+
+  </model>
+
+</sdf>

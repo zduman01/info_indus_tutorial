@@ -1,9 +1,0 @@
-pentographe_kinematics:
-  ros__parameters:
-    l0: 138.0
-    l1: 80.0
-    l2: 157.0
-    l3: 147.0
-    l4: 79.0
-    e_par: -16.0
-    e_perp: 26.0

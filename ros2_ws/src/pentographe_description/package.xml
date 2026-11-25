@@ -5,26 +5,43 @@
 
   <name>pentographe_description</name>
   <version>0.0.0</version>
-  <description>Description et visualisation du pantographe à cinq barres</description>
+
+  <description>
+    Description, visualisation et simulation du pantographe à cinq barres
+  </description>
 
   <maintainer email="zilan.duman@insa-strasbourg.fr">zilan</maintainer>
   <license>Apache-2.0</license>
 
+  <!-- Outils ROS2 -->
   <depend>rclpy</depend>
-  <depend>robot_state_publisher</depend>
-  <depend>geometry_msgs</depend>
-  <depend>sensor_msgs</depend>
   <depend>ament_index_python</depend>
   <depend>launch</depend>
   <depend>launch_ros</depend>
 
-  <exec_depend>rviz2</exec_depend>
+  <!-- Messages ROS2 -->
+  <depend>geometry_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>std_msgs</depend>
+
+  <!-- Cinematique -->
   <exec_depend>pentographe_kinematics</exec_depend>
+
+  <!-- Visualisation RViz -->
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+
+  <!-- Simulation Gazebo -->
+  <exec_depend>ros_gz_sim</exec_depend>
+  <exec_depend>ros_gz_bridge</exec_depend>
+
+  <!-- Interface RQT -->
   <exec_depend>rqt_gui</exec_depend>
   <exec_depend>rqt_topic</exec_depend>
   <exec_depend>rqt_publisher</exec_depend>
   <exec_depend>rqt_plot</exec_depend>
 
+  <!-- Tests -->
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
   <test_depend>ament_pep257</test_depend>

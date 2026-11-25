@@ -1,14 +1,23 @@
 import os
 
 from ament_index_python.packages import get_package_share_directory
+
 from launch import LaunchDescription
-from launch_ros.actions import Node
-from launch.actions import IncludeLaunchDescription
-from launch.actions import ExecuteProcess, TimerAction
+from launch.actions import (
+    IncludeLaunchDescription,
+    ExecuteProcess,
+    TimerAction
+)
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+
+from launch_ros.actions import Node
 
 
 def generate_launch_description():
+
+    # ==========================================
+    # CHEMINS DES PACKAGES
+    # ==========================================
 
     description_dir = get_package_share_directory(
         'pentographe_description'
@@ -17,6 +26,10 @@ def generate_launch_description():
     kinematics_dir = get_package_share_directory(
         'pentographe_kinematics'
     )
+
+    # ==========================================
+    # CHARGEMENT DU MODELE URDF
+    # ==========================================
 
     urdf_file = os.path.join(
         description_dir,
@@ -27,7 +40,10 @@ def generate_launch_description():
     with open(urdf_file, 'r') as fichier:
         robot_description = fichier.read()
 
-    # Cinematique avec les dimensions Creo
+    # ==========================================
+    # CINEMATIQUE AVEC LES DIMENSIONS CREO
+    # ==========================================
+
     kinematics = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(
@@ -38,14 +54,22 @@ def generate_launch_description():
         )
     )
 
-    # Conversion des angles pour l'URDF
+    # ==========================================
+    # CONVERSION DES ANGLES - MODE RVIZ
+    # ==========================================
+
     joint_bridge = Node(
         package='pentographe_description',
         executable='joint_bridge',
+        name='joint_bridge',
+        parameters=[{'mode': 'rviz'}],
         output='screen'
     )
 
-    # Publication des transformations TF
+    # ==========================================
+    # PUBLICATION DES TRANSFORMATIONS TF
+    # ==========================================
+
     robot_state_publisher = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
@@ -55,14 +79,16 @@ def generate_launch_description():
         output='screen'
     )
 
-    # Configuration RViz
+    # ==========================================
+    # LANCEMENT DE RVIZ
+    # ==========================================
+
     rviz_config = os.path.join(
         description_dir,
         'config',
         'pentographe.rviz'
     )
 
-    # Lancement de RViz
     rviz = Node(
         package='rviz2',
         executable='rviz2',
@@ -71,21 +97,26 @@ def generate_launch_description():
         output='screen'
     )
 
-    # Configuration RQT
+    # ==========================================
+    # LANCEMENT DE RQT
+    # ==========================================
+
     rqt_config = os.path.join(
         description_dir,
         'config',
         'pentographe.perspective'
     )
 
-    # Lancement de RQT
     rqt = ExecuteProcess(
         cmd=['rqt', '--perspective-file', rqt_config]
         if os.path.isfile(rqt_config) else ['rqt'],
         output='screen'
     )
 
-    # Initialisation de la position du stylo
+    # ==========================================
+    # POSITION INITIALE DU STYLO
+    # ==========================================
+
     initialisation = TimerAction(
         period=5.0,
         actions=[
@@ -101,6 +132,10 @@ def generate_launch_description():
             )
         ]
     )
+
+    # ==========================================
+    # LANCEMENT GLOBAL
+    # ==========================================
 
     return LaunchDescription([
         kinematics,

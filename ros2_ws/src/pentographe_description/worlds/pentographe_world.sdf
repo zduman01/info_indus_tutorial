@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+
+  <world name="pentographe_world">
+
+    <!-- Gravite verticale suivant -Z -->
+    <gravity>0 0 -9.81</gravity>
+
+    <!-- Configuration physique -->
+    <physics name="physics" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <!-- Moteur physique -->
+    <plugin
+      filename="ignition-gazebo-physics-system"
+      name="ignition::gazebo::systems::Physics"/>
+
+    <!-- Importation des modeles -->
+    <plugin
+      filename="ignition-gazebo-user-commands-system"
+      name="ignition::gazebo::systems::UserCommands"/>
+
+    <!-- Visualisation de la scene -->
+    <plugin
+      filename="ignition-gazebo-scene-broadcaster-system"
+      name="ignition::gazebo::systems::SceneBroadcaster"/>
+
+    <!-- Eclairage -->
+    <light type="directional" name="sun">
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 -0.5 -1</direction>
+    </light>
+
+    <!-- Interface graphique -->
+    <gui fullscreen="0">
+
+      <!-- Vue 3D et camera -->
+      <plugin filename="GzScene3D" name="3D View">
+
+        <ignition-gui>
+          <title>3D View</title>
+          <property type="bool" key="showTitleBar">false</property>
+          <property type="string" key="state">docked</property>
+        </ignition-gui>
+
+        <engine>ogre2</engine>
+        <scene>scene</scene>
+
+        <ambient_light>0.6 0.6 0.6</ambient_light>
+        <background_color>0.8 0.8 0.8</background_color>
+
+        <camera_pose>0 -0.55 0.65 0 0.85 1.5708</camera_pose>
+
+      </plugin>
+
+      <!-- Boutons Play / Pause -->
+      <plugin filename="WorldControl" name="World control">
+        <play_pause>true</play_pause>
+        <step>true</step>
+        <start_paused>true</start_paused>
+      </plugin>
+
+      <!-- Informations sur la simulation -->
+      <plugin filename="WorldStats" name="World stats">
+        <sim_time>true</sim_time>
+        <real_time>true</real_time>
+        <real_time_factor>true</real_time_factor>
+      </plugin>
+
+      <!-- Arborescence des objets -->
+      <plugin filename="EntityTree" name="Entity tree"/>
+
+      <!-- Proprietes des objets -->
+      <plugin filename="ComponentInspector" name="Component inspector"/>
+
+      <!-- Menu contextuel -->
+      <plugin filename="EntityContextMenuPlugin" name="Entity context menu"/>
+
+      <!-- Deplacement de la camera -->
+      <plugin filename="InteractiveViewControl" name="Interactive view control"/>
+
+    </gui>
+
+  </world>
+
+</sdf>
